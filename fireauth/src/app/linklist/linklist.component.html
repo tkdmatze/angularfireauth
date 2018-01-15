@@ -1,0 +1,7 @@
+<div class="topnav">
+  <a routerLink="/pub/homepage">Homepage</a>
+  <a routerLink="/pub/login" *ngIf="!authService.currentUser">Login</a>
+  <a routerLink="/pub/signup" *ngIf="!authService.currentUser">Sign Up</a>
+  <a routerLink="/profile" *ngIf="authService.currentUser">Profile</a>
+  <a (click)="signOut()" *ngIf="authService.currentUser">Sign Out</a>
+</div>
