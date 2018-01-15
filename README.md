@@ -1,0 +1,2 @@
+# angularfireauth
+simple auth
