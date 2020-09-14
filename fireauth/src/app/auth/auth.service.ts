@@ -1,9 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { AngularFireAuth } from 'angularfire2/auth';
+import {Injectable} from '@angular/core';
+import {Router} from '@angular/router';
+import {AngularFireAuth} from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/switchMap';
+
 
 @Injectable()
 export class AuthService {
@@ -13,13 +12,13 @@ export class AuthService {
   constructor(
     public afAuth: AngularFireAuth,
     private router: Router) {
-    this.afAuth.auth.onAuthStateChanged((user) => {
+    this.afAuth.onAuthStateChanged((user) => {
       this.currentUser = user;
     });
   }
 
   login(email: string, password: string) {
-    this.afAuth.auth.signInWithEmailAndPassword(email, password)
+    this.afAuth.signInWithEmailAndPassword(email, password)
       .then(value => {
         this.router.navigateByUrl(this.LANDING_PAGE);
       })
@@ -28,12 +27,13 @@ export class AuthService {
   }
 
   emailSignup(email: string, password: string) {
-    this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+    this.afAuth.createUserWithEmailAndPassword(email, password)
       .then(value => {
 
         this.router.navigateByUrl(this.LANDING_PAGE);
       })
       .catch(error => {
+        console.error(error);
       });
   }
 
@@ -42,20 +42,20 @@ export class AuthService {
     return this.oAuthLogin(provider)
       .then(value => {
 
-          this.router.navigateByUrl(this.LANDING_PAGE);
+        this.router.navigateByUrl(this.LANDING_PAGE);
       })
       .catch(error => {
       });
   }
 
   logout() {
-    this.afAuth.auth.signOut().then(() => {
+    this.afAuth.signOut().then(() => {
 
       this.router.navigate(['/']);
     });
   }
 
   private oAuthLogin(provider) {
-    return this.afAuth.auth.signInWithPopup(provider);
+    return this.afAuth.signInWithPopup(provider);
   }
 }

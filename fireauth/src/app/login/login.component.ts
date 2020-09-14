@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth/auth.service';
+import {Component, OnInit} from '@angular/core';
+import {AuthService} from '../auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -7,10 +7,14 @@ import { AuthService } from '../auth/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  email: string;
+  password: string;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {
+  }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   loginGoogle() {
     this.authService.googleLogin();
@@ -19,8 +23,8 @@ export class LoginComponent implements OnInit {
   onSubmit(formData) {
     if (formData.valid) {
       this.authService.login(
-        formData.value.email,
-        formData.value.password
+        this.email,
+        this.password
       );
     }
   }

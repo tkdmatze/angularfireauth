@@ -1,9 +1,9 @@
 <h2>Log In</h2>
 
 <form #formData="ngForm" (ngSubmit)="onSubmit(formData)">
-  <input type="text" placeholder="email" (ngModel)="email" name="email" required>
-  <input type="password" placeholder="password" (ngModel)="password" name="password" required>
-  <button mat--button type="submit" [disabled]="!formData.valid" class="auth-btn">Log In </button>
+  <input [(ngModel)]="email" name="email" placeholder="email" required type="text">
+  <input [(ngModel)]="password" name="password" placeholder="password" required type="password">
+  <button [disabled]="!formData.valid" class="auth-btn" mat-button type="submit">Log In</button>
 </form>
 <hr/>
 <button (click)="loginGoogle()" class="google">

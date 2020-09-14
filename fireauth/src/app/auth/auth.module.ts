@@ -1,20 +1,16 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { AuthService } from './auth.service';
-import { AuthGuard } from './auth.guard';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireAuthModule } from 'angularfire2/auth';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {AuthService} from './auth.service';
+import {AngularFireModule} from '@angular/fire';
+import {environment} from '../../environments/environment';
 
-const firebaseConfig = {
-  // insert you config here
-};
+
 @NgModule({
   imports: [
     CommonModule,
-    AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireAuthModule
+    AngularFireModule.initializeApp(environment.firebase)
   ],
-  providers: [AuthService, AuthGuard],
+  providers: [AuthService],
   declarations: []
 })
 export class AuthModule { }
